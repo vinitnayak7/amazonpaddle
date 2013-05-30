@@ -21,5 +21,6 @@
     <string name="rUsernameID">rUsernameID</string>
     <string name="rPasswordID">rPasswordID</string>
     <string name="rEmailID">rEmailID</string>
-    
+    <string name="title_activity_profile">ProfileActivity</string>
+
 </resources>

@@ -15,6 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="90dp"
+        android:onClick="goToProfileActivity"
         android:text="@string/register" />
 
     <TextView
