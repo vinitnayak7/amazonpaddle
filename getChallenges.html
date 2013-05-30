@@ -1,0 +1,20 @@
+<?php
+$con = mysqli_connect("localhost","gamersso_paddle","paddle","gamersso_paddle");
+if (mysqli_connect_errno($con)) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+
+$userID = $_REQUEST['id'];
+
+$query = 'SELECT * FROM games WHERE p2='.$userID;
+$response = mysql_query($query);
+
+if ($response) {
+	while ($row = mysql_fetch_assoc($response)) {
+
+	}
+} else {
+	print('{"result":"failure"}');
+}
+
+?>
