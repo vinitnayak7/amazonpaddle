@@ -31,16 +31,6 @@
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="50dp"
-        android:layout_height="35dp"
-        android:layout_below="@string/usernameID"
-        android:layout_marginTop="23dp"
-        android:layout_toLeftOf="@string/username"
-        android:text="@string/pw"
-        android:textSize="25sp" />
-
     <EditText
         android:id="@+id/passwordID"
         android:layout_width="wrap_content"
@@ -49,5 +39,35 @@
         android:layout_alignLeft="@string/username"
         android:ems="10"
         android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/usernameID"
+        android:layout_below="@+id/usernameID"
+        android:layout_marginTop="14dp"
+        android:text="@string/pw"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@string/loginID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/passwordID"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Login" />
+
+    <Button
+        android:id="@string/regID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@string/loginID"
+        android:layout_alignBottom="@string/loginID"
+        android:layout_marginLeft="41dp"
+        android:layout_toRightOf="@string/loginID"
+        android:text="Register" />
 
 </RelativeLayout>

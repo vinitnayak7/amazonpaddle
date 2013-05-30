@@ -11,6 +11,8 @@
     <string name="id">ID:</string>
     <string name="pw">PW:</string>
     <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="loginID">loginID</string>
+    <string name="regID">regID</string>
     <string name="register">Register!</string>
     <string name="registerID">RegisterID</string>
     <string name="rUsername">User: </string>
