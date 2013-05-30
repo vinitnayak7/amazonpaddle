@@ -13,8 +13,8 @@ $query = 'INSERT INTO games (p1, p2, name, accepted, comments) VALUES ('.$gameNa
 $response = mysql_query($query);
 
 if ($response) {
-	print('{"result":"success"}');
+	print(mysql_insert_id($con));
 } else {
-	print('{"result":"failed"}');
+	print('failed');
 }
 ?>

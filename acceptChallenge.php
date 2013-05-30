@@ -10,9 +10,9 @@ $query = 'UPDATE games SET accepted=1 WHERE id='.$gameID;
 $response = mysql_query($query);
 
 if ($response) {
-	print('{"result":"success"}');
+	print('success');
 } else {
-	print('{"result":"failed"}');
+	print('failure');
 }
 
 ?>
