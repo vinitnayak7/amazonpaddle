@@ -72,27 +72,5 @@ public class WebRequest {
         }
     }
     
-    /* TODO: move to login activity? */
-    public static boolean login(User user) {
-        if (user.username.length() == 0 || user.password.length() == 0) {
-            return false;
-        }
-
-        String urlParameters =
-                "username=" + URLEncoder.encode(user.username) +
-                "&password=" + URLEncoder.encode(user.password);
-
-        String response = WebRequest.executeGet(Global.base_url + "login.php", urlParameters);
-
-        if (response == null) {
-            return false;
-        }
-
-        if (response.equals("OK")) {
-            user.id = Integer.parseInt(response);
-            return true;
-        }
-
-        return false;
-    }
+    
 }

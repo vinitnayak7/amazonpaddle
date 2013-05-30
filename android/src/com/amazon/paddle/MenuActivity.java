@@ -1,5 +1,7 @@
 package com.amazon.paddle;
 
+import java.net.URLEncoder;
+
 import com.amazon.paddle.credential.User;
 import com.amazon.paddle.global.Global;
 import com.amazon.paddle.web.WebRequest;
@@ -42,13 +44,36 @@ public class MenuActivity extends Activity {
         u.username = user.getText().toString();
         u.password = password.getText().toString(); // TODO: md5 this
         
-        if (WebRequest.login(u)) {
+        if (this.login(u)) {
             Global.current_user = u;
             Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
         } else {
             Toast.makeText(this, "Wrong username or password", Toast.LENGTH_LONG).show();
         }
+    }
+    
+    private boolean login(User user) {
+        if (user.username.length() == 0 || user.password.length() == 0) {
+            return false;
+        }
+
+        String urlParameters =
+                "username=" + URLEncoder.encode(user.username) +
+                "&password=" + URLEncoder.encode(user.password);
+
+        String response = WebRequest.executeGet(Global.base_url + "login.php", urlParameters);
+
+        if (response == null) {
+            return false;
+        }
+
+        if (response.equals("OK")) {
+            user.id = Integer.parseInt(response);
+            return true;
+        }
+
+        return false;
     }
     
     /** On-Click method for register button (THIS register), to switch to RegistrationActivity. */
