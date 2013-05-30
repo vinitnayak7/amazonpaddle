@@ -9,8 +9,45 @@
     tools:context=".MenuActivity" >
 
     <TextView
+        android:id="@+id/usernameID"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@string/username"
+        android:layout_toLeftOf="@string/username"
+        android:textSize="30sp"
+        android:text="@string/id" />
+
+    <EditText
+        android:id="@string/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="158dp"
+        android:layout_marginRight="26dp"
+        android:ems="10"
+        android:hint="@string/userExample" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_below="@string/usernameID"
+        android:layout_marginTop="23dp"
+        android:layout_toLeftOf="@string/username"
+        android:text="@string/pw"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/passwordID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@string/username"
+        android:ems="10"
+        android:inputType="textPassword" />
 
 </RelativeLayout>
