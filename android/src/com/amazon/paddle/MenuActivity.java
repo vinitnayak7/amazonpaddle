@@ -18,7 +18,7 @@ public class MenuActivity extends Activity {
         final String pkg = this.getPackageName();
         login = (Button) findViewById(res.getIdentifier("loginID", "id", pkg));
         register = (Button) findViewById(res.getIdentifier("regID", "id", pkg));
-        user = (EditText) findViewById(res.getIdentifier("usernameID", "id", pkg));
+        user = (EditText) findViewById(res.getIdentifier("username", "id", pkg));
         password = (EditText) findViewById(res.getIdentifier("passwordID", "id", pkg));
     }
 
@@ -29,8 +29,8 @@ public class MenuActivity extends Activity {
         return true;
     }
 
-    /** On-Click method for login/register button (register in RegistrationActivity), to switch to ProfileActivity. */
-    public static void goToProfileActivity() {
+    /** On-Click method for login button, to switch to ProfileActivity. */
+    public void goToProfileActivity() {
         //TODO: set up the intent, putExtras([user's name]), start ProfileActivity
     }
     
