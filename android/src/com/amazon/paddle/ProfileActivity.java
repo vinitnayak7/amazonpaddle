@@ -1,7 +1,6 @@
 package com.amazon.paddle;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -17,7 +16,6 @@ public class ProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         
-        initializeElements();
         //TODO: Need to populate TextViews: name, record, email (do this once, so not in onResume)?
     }
 
@@ -28,7 +26,23 @@ public class ProfileActivity extends Activity {
         record = (TextView) findViewById(R.id.profileRecordID);
         email = (TextView) findViewById(R.id.profileEmailID);
         findUsers = (Button) findViewById(R.id.profileUsersID);
-        findUsers = (Button) findViewById(R.id.profileChallengesID);
+        challenges = (Button) findViewById(R.id.profileChallengesID);
+        if (!isMyself) {
+            findUsers.setText("Head2Head");
+            challenges.setText("Challenge");
+            findUsers.setOnClickListener(new Button.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   //TODO: go to HHActivity
+               }
+            });
+            challenges.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO: go to ChallengeOpActivity
+                }
+             });
+        }
         recentHistory = (ListView) findViewById(R.id.profileHistoryID);
     }
     
@@ -51,8 +65,13 @@ public class ProfileActivity extends Activity {
     @Override
     public void onResume() {
         //TODO: Need to pull recent activity and populate/update the ListView recentHistory
-         super.onResume();
+        isMyself = getIntent().getExtras() == null ? true : false;
+        initializeElements();
+        super.onResume();
     }
+    
+    
+    private boolean isMyself;
     private QuickContactBadge profilePicture;
     private TextView name;
     private TextView record;

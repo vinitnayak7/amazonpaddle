@@ -1,5 +1,7 @@
 package com.amazon.paddle;
 
+import com.amazon.paddle.global.Global;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +15,6 @@ public class UsersActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
-        
         initializeElements();
     }
 
@@ -33,6 +34,12 @@ public class UsersActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.users, menu);
         return true;
+    }
+
+    @Override
+    public void onResume() {
+        //TODO: need to pull updated user information and populate allUsers
+        super.onResume();
     }
 
     private Button back;
