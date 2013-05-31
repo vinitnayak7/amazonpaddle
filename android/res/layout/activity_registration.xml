@@ -55,6 +55,8 @@
         android:layout_alignBaseline="@+id/TextViewEmail"
         android:layout_alignBottom="@+id/TextViewEmail"
         android:layout_alignRight="@+id/rUsernameID"
+        android:inputType="textEmailAddress"
+        android:hint="i.e.internHack@amazon.com"
         android:ems="10" />
 
     <EditText
@@ -72,7 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/TextViewUser"
         android:layout_alignBottom="@+id/TextViewUser"
-        android:layout_toRightOf="@+id/TextViewEmail"
+        android:layout_toRightOf="@+id/TextViewEmail"    
+        android:hint="i.e.timstephani"
         android:ems="10" />
 
 </RelativeLayout>
