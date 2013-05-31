@@ -22,5 +22,15 @@
     <string name="rPasswordID">rPasswordID</string>
     <string name="rEmailID">rEmailID</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="profileNameID">profileNameID</string>
+    <string name="profileRecordID">profileRecordID</string>
+    <string name="profileEmailID">profileEmailID</string>
+    <string name="profileUsersID">profileUsersID</string>
+    <string name="profileChallengesID">profileChallengesID</string>
+    <string name="profileUsers">Find Users</string>
+    <string name="profileChallenges">Challenges</string>
+    <string name="profileHistoryID">profileHistoryID</string>
+    <string name="title_activity_users">UsersActivity</string>
+    <string name="title_activity_challenges">ChallengesActivity</string>
 
 </resources>
