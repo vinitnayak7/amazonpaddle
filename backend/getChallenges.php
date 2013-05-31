@@ -7,7 +7,7 @@ if (mysqli_connect_errno($con))
 
 $userID = $_REQUEST['id'];
 
-$query = 'SELECT * FROM games WHERE p2='.$userID.' AND winner=0 ORDER BY modified';
+$query = 'SELECT * FROM games WHERE (p2='.$userID.' OR p1='.$userID.') AND winner=0 ORDER BY modified';
 $response = mysqli_query($con, $query);
 
 if ($response) {
@@ -16,9 +16,18 @@ if ($response) {
 	while ($row = mysqli_fetch_assoc($response)) {
 		$ch=curl_init('http://brandonnalls.com/paddle/getNameFromID.php?id='.$row['p1']);
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	    $result=curl_exec($ch);
+	    $result1=curl_exec($ch);
 	    curl_close($ch);
-		print($row['name'].','.$row['p1'].','.$row['id'].','.$result."\n");
+	    $ch=curl_init('http://brandonnalls.com/paddle/getNameFromID.php?id='.$row['p2']);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    $result2=curl_exec($ch);
+	    curl_close($ch);
+	    print($row['id'].','.$result1.','.$result2.',');
+	    if ($row['p2'] == $userID && $row['accepted'] == 0) {
+			print('1'."\n");
+		} else {
+			print('0'."\n");
+		}
 	}
 } else {
 	print('failure');
