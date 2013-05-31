@@ -85,6 +85,7 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int dialog_acceptDecline=0x7f050026;
         public static final int dialog_sendChallenge_cancelLabel=0x7f050024;
         public static final int dialog_sendChallenge_comments=0x7f050022;
         public static final int dialog_sendChallenge_message=0x7f050020;

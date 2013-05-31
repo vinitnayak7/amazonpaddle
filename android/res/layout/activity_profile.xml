@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/quickContactBadge1"
         android:layout_below="@+id/quickContactBadge1"
+        android:layout_marginTop="30dp"
         android:text="@string/profileUsers"
         android:onClick="goToUsersActivity" />
 
@@ -56,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/profileUsersID"
         android:layout_alignBottom="@+id/profileUsersID"
+        android:layout_marginTop="30dp"
         android:layout_alignLeft="@+id/profileEmailID"
         android:text="@string/profileChallenges" />
 

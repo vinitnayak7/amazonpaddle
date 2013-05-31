@@ -39,5 +39,6 @@
     <string name="dialog_sendChallenge_submitLabel">Send Challenge</string>
     <string name="dialog_sendChallenge_cancelLabel">Cancel</string>
     <string name="title_activity_hh">HHActivity</string>
-
+    <string name="dialog_acceptDecline">Accept the Challenge?</string>
+    
 </resources>
