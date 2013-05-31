@@ -1,5 +1,7 @@
 package com.amazon.paddle;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -51,6 +53,7 @@ public class UsersActivity extends Activity {
     private class GetUsersTask extends AsyncTask<User, Void, Boolean> {
         ProgressDialog progressDialog;
         String response;
+        ArrayList<User> userList = new ArrayList<User>(); 
         
         @Override
         protected Boolean doInBackground(User... userArray) {
@@ -63,7 +66,21 @@ public class UsersActivity extends Activity {
                 "id=" + user.id;
      
             response = WebRequest.executeGet(Global.base_url + "getAllUsers.php?" + urlParameters, "");
-
+            if (response != null) {
+                Log.d("ALL USERS", response);
+                String[] individualUsers = response.split("\n");
+                for (String s : individualUsers) {
+                    String[] userAttributes = s.split(",");
+                    User u = new User();
+                    u.username = userAttributes[0];
+                    u.email = userAttributes[1];
+                    u.id = Integer.parseInt(userAttributes[2]);
+                    userList.add(u);
+                }
+                Log.d("ALL USERS", Integer.toString(userList.size()));
+            } else {
+                Log.d("ALL USERS", "no response!");
+            }
             return true;
         }
         @Override
@@ -75,12 +92,6 @@ public class UsersActivity extends Activity {
                 return;
             } 
             
-            if (response != null) {
-                Log.d("ALL USERS", response);
-                response.split("\n");
-            } else {
-                Log.d("ALL USERS", "no response!");
-            }
         }
         
         @Override
