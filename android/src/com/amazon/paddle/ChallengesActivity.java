@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -106,7 +107,7 @@ public class ChallengesActivity extends Activity {
                             }
                             g.comments = gameAttributes[5];
                             gameList.add(g);
-                            gameDisplayList.add(g.p1 +"\n" + g.comments);
+                            gameDisplayList.add(g.p1 + " v. " + g.p2 +"\n" + g.comments);
                         } else {
                         }
                         i++;
@@ -123,10 +124,11 @@ public class ChallengesActivity extends Activity {
         ArrayAdapter<String> arrayAdapter =      
                 new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, list);
         challenges.setAdapter(arrayAdapter);
-        challenges.setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(ChallengesActivity.this);
+        challenges.setOnItemSelectedListener(new OnItemSelectedListener(){
+        	@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+        		AlertDialog.Builder builder = new AlertDialog.Builder(ChallengesActivity.this);
             	builder.setMessage(R.string.dialog_acceptDecline);
             	builder.setPositiveButton("Bring it on!", new DialogInterface.OnClickListener(){
 					@Override
@@ -144,6 +146,13 @@ public class ChallengesActivity extends Activity {
             	});
             	builder.create();
 				builder.show();
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
 			}
         });
     }
