@@ -34,5 +34,9 @@
     <string name="title_activity_users">UsersActivity</string>
     <string name="title_activity_challenges">ChallengesActivity</string>
     <string name="dialog_sendChallenge_message">Challenge Details</string>
+    <string name="dialog_sendChallenge_name">Game Name ("Vinit's Doom")</string>
+    <string name="dialog_sendChallenge_comments">Game Time, Date, Etc</string>
+    <string name="dialog_sendChallenge_submitLabel">Send Challenge</string>
+    <string name="dialog_sendChallenge_cancelLabel">Cancel</string>
 
 </resources>

@@ -1,27 +1,27 @@
 package com.amazon.paddle;
 
 import java.net.URLEncoder;
-import java.security.NoSuchAlgorithmException;
-
-import com.amazon.paddle.credential.User;
-import com.amazon.paddle.global.Global;
-import com.amazon.paddle.web.WebRequest;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.amazon.paddle.global.Global;
+import com.amazon.paddle.web.WebRequest;
 
 public class ProfileActivity extends Activity {
 
@@ -40,7 +40,7 @@ public class ProfileActivity extends Activity {
     }
     
     /** SendChallengeTask is an asynctask making an api call for sendChallenge.php. */
-    private class SendChallengeTask extends AsyncTask<Void, Void, Boolean> {
+    private class SendChallengeTask extends AsyncTask<String, Void, Boolean> {
         ProgressDialog progressDialog;
         String response;
         
@@ -54,13 +54,13 @@ public class ProfileActivity extends Activity {
         }
         
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Boolean doInBackground(String... params) {
             String  urlParameters = null;
                 urlParameters =
-                    "gameName=" + URLEncoder.encode("randomname") +
+                    "gameName=" + URLEncoder.encode(params[0]) +
                     "&playerOne=" + URLEncoder.encode(String.valueOf(Global.current_user.id)) +
                     "&playerTwo=" + URLEncoder.encode(getIntent().getExtras().getString("ID"))+
-                    "&comments=" + URLEncoder.encode("randomcomment");
+                    "&comments=" + URLEncoder.encode(params[1]);
                 
            
             response = WebRequest.executeGet(Global.base_url + "sendChallenge.php?" + urlParameters, "");
@@ -70,9 +70,10 @@ public class ProfileActivity extends Activity {
         @Override
         protected void onPostExecute(Boolean result) {
             progressDialog.cancel();
-            
-            
-                //Toast.makeText(RegistrationActivity.this, "Unknown Error has occurred", Toast.LENGTH_LONG).show(); 
+            if(response.contains("failed"))
+                Toast.makeText(ProfileActivity.this, "Unknown Error has occurred", Toast.LENGTH_LONG).show();
+            else
+            	Toast.makeText(ProfileActivity.this, "Challenge Sent!", Toast.LENGTH_LONG).show();
             
         }
     }
@@ -159,9 +160,33 @@ public class ProfileActivity extends Activity {
                 public void onClick(View v) {
                 	AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
                 	builder.setMessage(R.string.dialog_sendChallenge_message);
+                	LayoutInflater inflater = ProfileActivity.this.getLayoutInflater();
+                	builder.setView(inflater.inflate(R.layout.dialog_sendchallenge, null));
+                	builder.setPositiveButton(R.string.dialog_sendChallenge_submitLabel, new DialogInterface.OnClickListener(){
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							EditText nameText = (EditText) v.getRootView().findViewById(R.id.gamename);
+							EditText commentText = (EditText) v.getRootView().findViewById(R.id.gamecomments);
+							String gameName = nameText.getText().toString();
+							String gameComment = commentText.getText().toString();
+							new SendChallengeTask().execute(new String[]{gameName,gameComment});
+							dialog.dismiss();
+						}
+                		
+                	});
+                	builder.setNegativeButton(R.string.dialog_sendChallenge_cancelLabel, new DialogInterface.OnClickListener(){
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							dialog.dismiss();
+						}
+                		
+                	});
+
                 	builder.create();
                 	builder.show();
-                	Toast.makeText(ProfileActivity.this, "launches", Toast.LENGTH_SHORT);
+                	
                 }
              });
         } else {
