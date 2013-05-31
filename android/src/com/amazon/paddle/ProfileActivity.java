@@ -1,6 +1,7 @@
 package com.amazon.paddle;
 
 import java.net.URLEncoder;
+import java.security.NoSuchAlgorithmException;
 
 import com.amazon.paddle.credential.User;
 import com.amazon.paddle.global.Global;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProfileActivity extends Activity {
 
@@ -34,6 +36,49 @@ public class ProfileActivity extends Activity {
     private void loadUserInfo() {
         new LoadUserInfoTask().execute();
         //name.setText(Global.current_user.first_name);
+    }
+    
+    /** SendChallengeTask is an asynctask making an api call for sendChallenge.php. */
+    private class SendChallengeTask extends AsyncTask<Void, Void, Boolean> {
+        ProgressDialog progressDialog;
+        String response;
+        
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(
+                    ProfileActivity.this);
+            progressDialog.setMessage("Sending Challenge...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+        
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            String  urlParameters = null;
+            try {
+                urlParameters =
+                    "gameName=" + URLEncoder.encode(username.getText().toString()) +
+                    "&playerOne=" + URLEncoder.encode(String.valueOf(Global.current_user.id)) +
+                    "&playerTwo=" + URLEncoder.encode(getIntent().getExtras().getString("ID"))+
+                    "&comments=" + URLEncoder.encode(comment.getText().toString());
+                
+            } catch (NoSuchAlgorithmException nsae) {
+                //gg can't hash
+            }
+            response = WebRequest.executeGet(Global.base_url + "register.php?" + urlParameters, "");
+            return true;
+        }
+        
+        @Override
+        protected void onPostExecute(Boolean result) {
+            progressDialog.cancel();
+            
+            try {
+                Integer.parseInt(response.trim());
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(RegistrationActivity.this, "Unknown Error has occurred", Toast.LENGTH_LONG).show(); 
+            }
+        }
     }
     
     private class LoadUserInfoTask extends AsyncTask<Void, Void, Boolean> {
