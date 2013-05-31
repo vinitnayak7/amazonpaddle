@@ -25,24 +25,12 @@ import com.amazon.paddle.global.*;
 
 public class MenuActivity extends Activity {
 
-    public static boolean isLoggingIn = false;
-    public static boolean isLoggedIn = false;
-    public String resp = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
        
         initializeElements();
-
-    }
-    
-    public static synchronized boolean getIsLoggingIn() {
-        return MenuActivity.isLoggingIn;
-    }
-    
-    public static synchronized void setIsLoggingIn(boolean val) {
-        MenuActivity.isLoggingIn = val;
     }
 
     /** Modularized initializing Elements in case we change layout later.*/
@@ -89,31 +77,28 @@ public class MenuActivity extends Activity {
         
         @Override
         protected Boolean doInBackground(User... userArray) {
-            try {
-                User user = userArray[0];
-                if (user.username.length() == 0 || user.password.length() == 0) {
-                    return false;
-                }
-
-                String urlParameters =
-                    "username=" + URLEncoder.encode(user.username) +
-                    "&password=" + URLEncoder.encode(user.password);
-         
-                response = WebRequest.executeGet(Global.base_url + "login.php?" + urlParameters, "");
-           
-                if (response == null || response.equals("BAD")) {
-                    return false;
-                } 
-            } catch (Exception e) {
-                Log.d("exception", e.toString());
-            } finally {
-                return true;
+            User user = userArray[0];
+            if (user.username.length() == 0 || user.password.length() == 0) {
+                return false;
             }
+
+            String urlParameters =
+                "username=" + URLEncoder.encode(user.username) +
+                "&password=" + URLEncoder.encode(user.password);
+     
+            response = WebRequest.executeGet(Global.base_url + "login.php?" + urlParameters, "");
+
+            return true;
         }
         @Override
         protected void onPostExecute(Boolean result) {
             progressDialog.cancel();
-
+            
+            if (result == false) {
+                Toast.makeText(MenuActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();  
+                return;
+            } 
+            
             boolean isId = false;
             
             try {
