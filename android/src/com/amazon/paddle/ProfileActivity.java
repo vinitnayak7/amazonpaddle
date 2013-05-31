@@ -8,6 +8,7 @@ import com.amazon.paddle.global.Global;
 import com.amazon.paddle.web.WebRequest;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -55,17 +56,14 @@ public class ProfileActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params) {
             String  urlParameters = null;
-            try {
                 urlParameters =
-                    "gameName=" + URLEncoder.encode(username.getText().toString()) +
+                    "gameName=" + URLEncoder.encode("randomname") +
                     "&playerOne=" + URLEncoder.encode(String.valueOf(Global.current_user.id)) +
                     "&playerTwo=" + URLEncoder.encode(getIntent().getExtras().getString("ID"))+
-                    "&comments=" + URLEncoder.encode(comment.getText().toString());
+                    "&comments=" + URLEncoder.encode("randomcomment");
                 
-            } catch (NoSuchAlgorithmException nsae) {
-                //gg can't hash
-            }
-            response = WebRequest.executeGet(Global.base_url + "register.php?" + urlParameters, "");
+           
+            response = WebRequest.executeGet(Global.base_url + "sendChallenge.php?" + urlParameters, "");
             return true;
         }
         
@@ -73,11 +71,9 @@ public class ProfileActivity extends Activity {
         protected void onPostExecute(Boolean result) {
             progressDialog.cancel();
             
-            try {
-                Integer.parseInt(response.trim());
-            } catch (NumberFormatException nfe) {
-                Toast.makeText(RegistrationActivity.this, "Unknown Error has occurred", Toast.LENGTH_LONG).show(); 
-            }
+            
+                //Toast.makeText(RegistrationActivity.this, "Unknown Error has occurred", Toast.LENGTH_LONG).show(); 
+            
         }
     }
     
@@ -161,7 +157,11 @@ public class ProfileActivity extends Activity {
             challenges.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO: go to ChallengeOpActivity
+                	AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+                	builder.setMessage(R.string.dialog_sendChallenge_message);
+                	builder.create();
+                	builder.show();
+                	Toast.makeText(ProfileActivity.this, "launches", Toast.LENGTH_SHORT);
                 }
              });
         } else {

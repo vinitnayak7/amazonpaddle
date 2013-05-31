@@ -33,5 +33,6 @@
     <string name="profileHistoryID">profileHistoryID</string>
     <string name="title_activity_users">UsersActivity</string>
     <string name="title_activity_challenges">ChallengesActivity</string>
+    <string name="dialog_sendChallenge_message">Challenge Details</string>
 
 </resources>
