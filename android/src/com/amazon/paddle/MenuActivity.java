@@ -11,6 +11,7 @@ import com.amazon.paddle.global.Global;
 import com.amazon.paddle.web.WebRequest;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -74,42 +75,31 @@ public class MenuActivity extends Activity {
           hashtext = "0"+hashtext;
         }
         u.password = hashtext;
-        
-        MenuActivity.setIsLoggingIn(true);
-        
+        Global.current_user = u;
         new LoginTask().execute(u);
-        
-        if (!resp.equals("BAD")) {
-            Global.current_user = u;
-            Intent i = new Intent(this, ProfileActivity.class);
-            startActivity(i);
-        } else {
-            Log.d("resp:", resp);
-            Toast.makeText(this, "Wrong username or password", Toast.LENGTH_LONG).show();
-        }
     }
     
     private class LoginTask extends AsyncTask<User, Void, Boolean> {
+        ProgressDialog progressDialog;
+        String response;
+        
         @Override
         protected Boolean doInBackground(User... userArray) {
             try {
-            User user = userArray[0];
-            if (user.username.length() == 0 || user.password.length() == 0) {
-                return false;
-            }
+                User user = userArray[0];
+                if (user.username.length() == 0 || user.password.length() == 0) {
+                    return false;
+                }
 
-            String urlParameters =
+                String urlParameters =
                     "username=" + URLEncoder.encode(user.username) +
                     "&password=" + URLEncoder.encode(user.password);
-            Log.d("login params", urlParameters);
-            String response = WebRequest.executeGet(Global.base_url + "login.php?" + urlParameters, "");
-            Log.d("response", response);
-            if (response == null || response.equals("BAD")) {
-                return false;
-            } else {
-                user.id = Integer.parseInt(response);
-                resp = response;
-            }
+         
+                response = WebRequest.executeGet(Global.base_url + "login.php?" + urlParameters, "");
+           
+                if (response == null || response.equals("BAD")) {
+                    return false;
+                } 
             } catch (Exception e) {
                 Log.d("exception", e.toString());
             } finally {
@@ -118,9 +108,32 @@ public class MenuActivity extends Activity {
         }
         @Override
         protected void onPostExecute(Boolean result) {
-            Log.d("in post execute. result: ", result.toString());
-            MenuActivity.isLoggedIn = result;
-            MenuActivity.setIsLoggingIn(false);
+            progressDialog.cancel();
+
+            boolean isId = false;
+            
+            try {
+                Global.current_user.id = Integer.parseInt(response.trim());
+                isId = true;
+            } catch (NumberFormatException e) {
+                // do nothing
+            }
+   
+            if (isId) {
+                Intent i = new Intent(MenuActivity.this, ProfileActivity.class);
+                startActivity(i);
+            } else {
+                Toast.makeText(MenuActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+            }
+        }
+        
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(
+                    MenuActivity.this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
     }
     
