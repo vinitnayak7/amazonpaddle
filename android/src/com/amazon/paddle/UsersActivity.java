@@ -23,9 +23,6 @@ import com.amazon.paddle.web.WebRequest;
 
 public class UsersActivity extends Activity {
 
-    private ArrayList<String> userNameList = new ArrayList<String>();
-    private ArrayList<User> userList = new ArrayList<User>();
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +129,9 @@ public class UsersActivity extends Activity {
     }
     
     
-    
+
+    private ArrayList<String> userNameList = new ArrayList<String>();
+    private ArrayList<User> userList = new ArrayList<User>();
     private Button back;
     private ListView allUsers;
 }

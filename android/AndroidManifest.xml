@@ -40,6 +40,10 @@
             android:name="com.amazon.paddle.ChallengesActivity"
             android:label="@string/title_activity_challenges" >
         </activity>
+        <activity
+            android:name="com.amazon.paddle.HHActivity"
+            android:label="@string/title_activity_hh" >
+        </activity>
     </application>
 
 </manifest>
