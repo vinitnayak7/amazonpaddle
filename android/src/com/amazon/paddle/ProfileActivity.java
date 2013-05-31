@@ -1,6 +1,8 @@
 package com.amazon.paddle;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -54,6 +56,8 @@ public class ProfileActivity extends Activity {
     /** On-Click method for challenges, takes you to ChallengesActivity. */
     public void goToChallengesActivity(View v) {
         //TODO: send to challenges activity, where you list all people who've challenged you
+        Intent i = new Intent(this, ChallengesActivity.class);
+        startActivity(i);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
