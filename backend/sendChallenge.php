@@ -5,7 +5,7 @@ if (mysqli_connect_errno($con))
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-$gameName = str_replace(',', '', $_REQUEST['gameName']);
+$gameName = $_REQUEST['gameName'];
 $playerOne = $_REQUEST['playerOne'];
 $playerTwo = $_REQUEST['playerTwo'];
 $comments = $_REQUEST['comments'];
