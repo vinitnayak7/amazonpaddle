@@ -7,15 +7,17 @@ if (mysqli_connect_errno($con))
 
 $id = $_REQUEST['id'];
 
-$query = 'SELECT * FROM users WHERE id <>'.$id.' ORDER BY username';
+$query = "SELECT username FROM users WHERE id=".$id;
 $response = mysqli_query($con, $query);
 
 if ($response) {
-	while ($row = mysqli_fetch_assoc($response)) {
-		print($row['username'].','.$row['id']."\n");
+	$row = mysqli_fetch_assoc($response);
+	if ($row['username']) {
+		print($row['username']);
+	} else {
+		print("BAD");
 	}
 } else {
-	print('failure');
+	print('BAD ID');
 }
-
 ?>
