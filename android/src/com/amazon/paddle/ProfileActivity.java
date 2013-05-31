@@ -38,19 +38,27 @@ public class ProfileActivity extends Activity {
     
     private class LoadUserInfoTask extends AsyncTask<Void, Void, Boolean> {
         ProgressDialog progressDialog;
-        String response;
+        String winloss;
+        String uname;
+        String uemail;
         
         @Override
         protected Boolean doInBackground(Void... params) {
             // Hack to convert int to string
             StringBuilder sb = new StringBuilder();
             sb.append("");
-            sb.append(Global.current_user.id);
+            if (isMyself) {
+                sb.append(Global.current_user.id);
+            } else {
+                Log.d("Id", getIntent().getExtras().getString("ID"));
+                sb.append(getIntent().getExtras().getString("ID"));
+            }
             String urlParameters =
                     "id=" + URLEncoder.encode(sb.toString());
          
-            response = WebRequest.executeGet(Global.base_url + "getWinLosses.php?" + urlParameters, "");
-            
+            winloss = WebRequest.executeGet(Global.base_url + "getWinLosses.php?" + urlParameters, "");
+            uname = WebRequest.executeGet(Global.base_url + "getNameFromID.php?" + urlParameters, "");
+            uemail = WebRequest.executeGet(Global.base_url + "getAllUsers.php?" + urlParameters, "");
             return true;
         }
         
@@ -65,13 +73,25 @@ public class ProfileActivity extends Activity {
         
         @Override
         protected void onPostExecute(Boolean result) {
-            Log.d("profile response", response);
-            if (response.equals("BAD")) {
+            Log.d("profile response", winloss);
+            if (winloss.equals("BAD")) {
                 record.setText("W-L: N/A");
             } else {
-                record.setText("W-L: " + response);
+                record.setText("W-L: " + winloss.replace(':', '-'));
             }
             
+            if (uname.equals("BAD")) {
+                name.setText("Name: N/A");
+            } else {
+                name.setText("Name: " + uname);
+            }
+            
+            if (uemail.equals("BAD")) {
+                email.setText("Email: N/A");  
+            } else {
+                String[] csv = uemail.split(",");
+                email.setText("Email: " + csv[1]);
+            }
             progressDialog.cancel();
         }
     }
@@ -86,7 +106,7 @@ public class ProfileActivity extends Activity {
         challenges = (Button) findViewById(R.id.profileChallengesID);
         if (!isMyself) {
             findUsers.setText("Head2Head");
-            challenges.setText("Challenge");
+            challenges.setText("Challenge ME");
             findUsers.setOnClickListener(new Button.OnClickListener() {
                @Override
                public void onClick(View v) {
@@ -99,6 +119,14 @@ public class ProfileActivity extends Activity {
                     //TODO: go to ChallengeOpActivity
                 }
              });
+        } else {
+            challenges.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(ProfileActivity.this, ChallengesActivity.class);
+                    startActivity(i);
+                }
+             });
         }
         recentHistory = (ListView) findViewById(R.id.profileHistoryID);
     }
@@ -109,12 +137,6 @@ public class ProfileActivity extends Activity {
         startActivity(i);
     }
     
-    /** On-Click method for challenges, takes you to ChallengesActivity. */
-    public void goToChallengesActivity(View v) {
-        //TODO: send to challenges activity, where you list all people who've challenged you
-        Intent i = new Intent(this, ChallengesActivity.class);
-        startActivity(i);
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

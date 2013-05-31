@@ -53,9 +53,15 @@ public class MenuActivity extends Activity {
         u.username = user.getText().toString();
         
         String plaintext = password.getText().toString();
+        u.password = md5hash(plaintext);
+        Global.current_user = u;
+        new LoginTask().execute(u);
+    }
+    
+    public static String md5hash(final String input) throws NoSuchAlgorithmException {
         MessageDigest m = MessageDigest.getInstance("MD5");
         m.reset();
-        m.update(plaintext.getBytes());
+        m.update(input.getBytes());
         byte[] digest = m.digest();
         BigInteger bigInt = new BigInteger(1,digest);
         String hashtext = bigInt.toString(16);
@@ -63,11 +69,8 @@ public class MenuActivity extends Activity {
         while(hashtext.length() < 32 ){
           hashtext = "0"+hashtext;
         }
-        u.password = hashtext;
-        Global.current_user = u;
-        new LoginTask().execute(u);
+        return hashtext;
     }
-    
     private class LoginTask extends AsyncTask<User, Void, Boolean> {
         ProgressDialog progressDialog;
         String response;

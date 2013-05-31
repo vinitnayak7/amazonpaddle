@@ -43,7 +43,7 @@
 
     <Button
         android:id="@+id/profileUsersID"
-        android:layout_width="125dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/quickContactBadge1"
         android:layout_below="@+id/quickContactBadge1"
@@ -52,7 +52,7 @@
 
     <Button
         android:id="@+id/profileChallengesID"
-        android:layout_width="125dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/profileUsersID"
         android:layout_alignBottom="@+id/profileUsersID"
@@ -64,7 +64,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profileUsersID"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp" >
     </ListView>
 
 
