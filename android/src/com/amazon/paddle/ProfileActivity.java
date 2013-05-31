@@ -99,6 +99,7 @@ public class ProfileActivity extends Activity {
     /** Modularized initializing Elements just in case we change layout later. */
     private void initializeElements() {
         profilePicture = (QuickContactBadge) findViewById(R.id.quickContactBadge1);
+        profilePicture.setBackgroundResource(getResources().getIdentifier("vinitpic", "drawable", this.getPackageName()));
         name = (TextView) findViewById(R.id.profileNameID);
         record = (TextView) findViewById(R.id.profileRecordID);
         email = (TextView) findViewById(R.id.profileEmailID);
@@ -152,7 +153,7 @@ public class ProfileActivity extends Activity {
         super.onResume();
     }
     
-    
+     
     private boolean isMyself;
     private QuickContactBadge profilePicture;
     private TextView name;

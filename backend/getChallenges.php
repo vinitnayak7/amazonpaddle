@@ -22,11 +22,11 @@ if ($response) {
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	    $result2=curl_exec($ch);
 	    curl_close($ch);
-	    print($row['id'].','.$result1.','.$result2.',');
+	    print($row['id'].','.$row['name'].','.$result1.','.$result2.',');
 	    if ($row['p2'] == $userID && $row['accepted'] == 0) {
-			print('1'."\n");
+			print('1,'.$row['comments']."\n");
 		} else {
-			print('0'."\n");
+			print('0,'.$row['comments']."\n");
 		}
 	}
 } else {
