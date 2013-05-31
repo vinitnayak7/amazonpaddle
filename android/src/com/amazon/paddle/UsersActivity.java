@@ -66,6 +66,8 @@ public class UsersActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
+        userNameList.clear();
+        userList.clear();
         new GetUsersTask().execute(Global.current_user);
     }
     
