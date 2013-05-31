@@ -78,7 +78,7 @@ public class MenuActivity extends Activity {
         @Override
         protected Boolean doInBackground(User... userArray) {
             User user = userArray[0];
-            if (user.username.length() == 0 || user.password.length() == 0) {
+            if (Global.current_user.username.length() == 0 || Global.current_user.password.length() == 0) {
                 return false;
             }
 
