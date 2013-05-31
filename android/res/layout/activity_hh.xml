@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".HHActivity" >
+
+    <QuickContactBadge
+        android:id="@+id/P1pic"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <QuickContactBadge
+        android:id="@+id/P2pic"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/QuickContactBadge01" />
+
+    <TextView
+        android:id="@+id/hhP1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/QuickContactBadge01"
+        android:layout_below="@+id/QuickContactBadge01"
+        android:layout_marginTop="14dp"
+        android:text="(Name Goes Here)" />
+
+    <TextView
+        android:id="@+id/hhP2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/quickContactBadge1"
+        android:text="(Name Goes Here)" />
+
+    <TextView
+        android:id="@+id/hhRecord"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:gravity="center"
+        android:text="X - Y"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="45sp" />
+
+    <ListView
+        android:id="@+id/hhHistory"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="18dp" >
+    </ListView>
+
+    <Button
+        android:id="@+id/hhback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listView1"
+        android:layout_centerHorizontal="true"
+        android:text="Back" />
+
+</RelativeLayout>

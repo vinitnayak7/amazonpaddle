@@ -24,7 +24,8 @@
         android:layout_height="300dp"
         android:layout_alignLeft="@+id/textView1"
         android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1" >
+        android:layout_below="@+id/textView1"
+        android:layout_margin="10dp" >
 
     </ListView>
 
