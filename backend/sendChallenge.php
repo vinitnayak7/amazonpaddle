@@ -13,7 +13,7 @@ $comments = $_REQUEST['comments'];
 $query = 'INSERT INTO games (name, p1, p2, accepted, comments) VALUES ("'.$gameName.'","'.$playerOne.'","'.$playerTwo.'",0,"'.$comments.'")';
 $response = mysqli_query($con, $query);
 
-if ($response) {
+if (mysql_affected_rows($con)) {
 	print(mysqli_insert_id($con));
 } else {
 	print('failed');
