@@ -4,11 +4,15 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,11 +23,26 @@ import com.amazon.paddle.web.WebRequest;
 
 public class UsersActivity extends Activity {
 
+    private ArrayList<String> userNameList = new ArrayList<String>();
+    private ArrayList<User> userList = new ArrayList<User>();
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
         initializeElements();
+        UsersActivity ua = this;
+        allUsers.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                    long arg3) {
+                Intent i = new Intent(UsersActivity.this, ProfileActivity.class);
+                i.putExtra("ID", Integer.toString(userList.get(arg2).id));
+                startActivity(i);
+            }
+            
+        });
     }
 
     /** Modularize the initialization of elements just in case we change them */
@@ -53,7 +72,6 @@ public class UsersActivity extends Activity {
     private class GetUsersTask extends AsyncTask<User, Void, Boolean> {
         ProgressDialog progressDialog;
         String response;
-        ArrayList<User> userList = new ArrayList<User>(); 
         
         @Override
         protected Boolean doInBackground(User... userArray) {
@@ -67,7 +85,6 @@ public class UsersActivity extends Activity {
      
             response = WebRequest.executeGet(Global.base_url + "getAllUsers.php?" + urlParameters, "");
             if (response != null) {
-                Log.d("ALL USERS", response);
                 String[] individualUsers = response.split("\n");
                 for (String s : individualUsers) {
                     String[] userAttributes = s.split(",");
@@ -76,8 +93,8 @@ public class UsersActivity extends Activity {
                     u.email = userAttributes[1];
                     u.id = Integer.parseInt(userAttributes[2]);
                     userList.add(u);
+                    userNameList.add(u.username+"\n"+u.email);
                 }
-                Log.d("ALL USERS", Integer.toString(userList.size()));
             } else {
                 Log.d("ALL USERS", "no response!");
             }
@@ -90,7 +107,8 @@ public class UsersActivity extends Activity {
             if (result == false) {
                 Toast.makeText(UsersActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();  
                 return;
-            } 
+            }
+            populateUserList(userNameList);
             
         }
         
@@ -104,6 +122,15 @@ public class UsersActivity extends Activity {
         }
     }
 
+    // Set adapter for listview after request to server has been made
+    private void populateUserList(ArrayList<String> list) {
+        ArrayAdapter<String> arrayAdapter =      
+                new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, list);
+        allUsers.setAdapter(arrayAdapter);
+    }
+    
+    
+    
     private Button back;
     private ListView allUsers;
 }
