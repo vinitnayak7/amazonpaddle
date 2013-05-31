@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="90dp"
         android:onClick="goToProfileActivity"
-        android:text="@+id/register" />
+        android:text="@string/register" />
 
     <TextView
         android:id="@+id/TextViewUser"
@@ -25,7 +25,7 @@
         android:layout_alignLeft="@+id/registerID"
         android:layout_alignParentTop="true"
         android:layout_marginTop="106dp"
-        android:text="@+id/rUsername"
+        android:text="@string/rUsername"
         android:textSize="20sp" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_alignLeft="@+id/TextViewUser"
         android:layout_below="@+id/TextViewUser"
         android:layout_marginTop="18dp"
-        android:text="@+id/rEmail"
+        android:text="@string/rEmail"
         android:textSize="20sp" />
 
     <TextView
@@ -45,7 +45,7 @@
         android:layout_alignLeft="@+id/TextViewEmail"
         android:layout_below="@+id/TextViewEmail"
         android:layout_marginTop="18dp"
-        android:text="@+id/rPassword"
+        android:text="@string/rPassword"
         android:textSize="20sp" />
 
     <EditText

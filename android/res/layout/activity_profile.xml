@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/quickContactBadge1"
         android:layout_below="@+id/quickContactBadge1"
-        android:text="@+id/profileUsers" />
+        android:text="@string/profileUsers" />
 
     <Button
         android:id="@+id/profileChallengesID"
@@ -56,7 +56,7 @@
         android:layout_alignBaseline="@+id/profileUsersID"
         android:layout_alignBottom="@+id/profileUsersID"
         android:layout_alignLeft="@+id/profileEmailID"
-        android:text="@+id/profileChallenges" />
+        android:text="@string/profileChallenges" />
 
     <ListView
         android:id="@+id/profileHistoryID"

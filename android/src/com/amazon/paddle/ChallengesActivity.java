@@ -16,7 +16,7 @@ public class ChallengesActivity extends Activity {
         
         initializeElements();
     }
-
+ 
     /** Modularize the initialization of elements just in case we change them */
     private void initializeElements() {
         back = (Button) findViewById(R.id.challengesBack);

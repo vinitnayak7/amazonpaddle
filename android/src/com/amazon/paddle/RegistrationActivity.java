@@ -35,7 +35,7 @@ public class RegistrationActivity extends Activity {
 
     /** On-Click method for login button, to switch to ProfileActivity. */
     public void goToProfileActivity(View v) {
-        //TODO: set up the intent, putExtras([user's name]), start ProfileActivity
+        //TODO: set up the intent, register user info into server, start ProfileActivity
     }
     
     private Button register;

@@ -28,7 +28,7 @@ public class WebRequest {
             //Create connection
             url = new URL(targetURL);
             connection = (HttpURLConnection)url.openConnection();
-            connection.setRequestMethod("POST");
+            connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", 
                "application/x-www-form-urlencoded");
             
@@ -71,6 +71,4 @@ public class WebRequest {
             }
         }
     }
-    
-    
 }
