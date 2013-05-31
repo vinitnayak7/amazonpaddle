@@ -99,6 +99,14 @@ public class ProfileActivity extends Activity {
                     //TODO: go to ChallengeOpActivity
                 }
              });
+        } else {
+            challenges.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(ProfileActivity.this, ChallengesActivity.class);
+                    startActivity(i);
+                }
+             });
         }
         recentHistory = (ListView) findViewById(R.id.profileHistoryID);
     }
@@ -108,12 +116,6 @@ public class ProfileActivity extends Activity {
         //TODO: send to new activity where you grab all existing users except yourself and list them.
     }
     
-    /** On-Click method for challenges, takes you to ChallengesActivity. */
-    public void goToChallengesActivity(View v) {
-        //TODO: send to challenges activity, where you list all people who've challenged you
-        Intent i = new Intent(this, ChallengesActivity.class);
-        startActivity(i);
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
