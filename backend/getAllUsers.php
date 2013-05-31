@@ -12,7 +12,7 @@ $response = mysqli_query($con, $query);
 
 if ($response) {
 	while ($row = mysqli_fetch_assoc($response)) {
-		print($row['username'].','.$row['id']."\n");
+		print($row['username'].','.$row['email'].','.$row['id']."\n");
 	}
 } else {
 	print('failure');
