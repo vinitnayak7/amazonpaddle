@@ -8,17 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MenuActivity" >
 
-    <TextView
-        android:id="@+id/usernameID"
-        android:layout_width="50dp"
-        android:layout_height="35dp"
-        android:layout_alignTop="@string/username"
-        android:layout_toLeftOf="@string/username"
-        android:textSize="30sp"
-        android:text="@string/id" />
-
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/usernameID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -31,45 +22,54 @@
         <requestFocus />
     </EditText>
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/username"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/usernameID"
+        android:text="@string/pw"
+        android:textSize="25sp" />
+
     <EditText
         android:id="@+id/passwordID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView2"
-        android:layout_alignLeft="@string/username"
+        android:layout_alignLeft="@+id/usernameID"
         android:ems="10"
         android:inputType="textPassword" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/username"
         android:layout_width="50dp"
         android:layout_height="35dp"
-        android:layout_alignLeft="@+id/usernameID"
-        android:layout_below="@+id/usernameID"
-        android:layout_marginTop="14dp"
-        android:text="@string/pw"
-        android:textSize="25sp" />
-
-    <Button
-        android:id="@string/loginID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/usernameID"
         android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/passwordID"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:onClick="goToProfileActivity"
-        android:text="Login" />
+        android:text="@string/id"
+        android:textSize="30sp" />
 
     <Button
-        android:id="@string/regID"
-        android:layout_width="wrap_content"
+        android:id="@+id/regID"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@string/loginID"
-        android:layout_alignBottom="@string/loginID"
-        android:layout_marginLeft="41dp"
-        android:layout_toRightOf="@string/loginID"
+        android:layout_alignBaseline="@+id/loginID"
+        android:layout_alignBottom="@+id/loginID"
+        android:layout_alignRight="@+id/usernameID"
+        android:layout_marginRight="22dp"
         android:onClick="goToRegistrationActivity"
         android:text="Register" />
+
+    <Button
+        android:id="@+id/loginID"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="21dp"
+        android:onClick="goToProfileActivity"
+        android:text="Login" />
 
 </RelativeLayout>

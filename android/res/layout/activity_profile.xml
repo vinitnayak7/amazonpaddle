@@ -16,13 +16,54 @@
         android:layout_alignParentTop="true" />
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/profileNameID"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
         android:layout_alignTop="@+id/quickContactBadge1"
         android:layout_marginLeft="19dp"
         android:layout_marginTop="29dp"
         android:layout_toRightOf="@+id/quickContactBadge1"
-        android:text="TextView" />
+        android:text="Name: " />
+
+    <TextView
+        android:id="@+id/profileRecordID"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/profileNameID"
+        android:layout_below="@+id/profileNameID"
+        android:text="W-L: " />
+
+    <TextView
+        android:id="@+id/profileEmailID"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/profileRecordID"
+        android:layout_below="@+id/profileRecordID"
+        android:text="Email: " />
+
+    <Button
+        android:id="@+id/profileUsersID"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/quickContactBadge1"
+        android:layout_below="@+id/quickContactBadge1"
+        android:text="@+id/profileUsers" />
+
+    <Button
+        android:id="@+id/profileChallengesID"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/profileUsersID"
+        android:layout_alignBottom="@+id/profileUsersID"
+        android:layout_alignLeft="@+id/profileEmailID"
+        android:text="@+id/profileChallenges" />
+
+    <ListView
+        android:id="@+id/profileHistoryID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileUsersID"
+        android:layout_centerHorizontal="true" >
+    </ListView>
 
 </RelativeLayout>

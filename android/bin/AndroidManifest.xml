@@ -4,6 +4,8 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
@@ -29,6 +31,14 @@
         <activity
             android:name="com.amazon.paddle.ProfileActivity"
             android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="com.amazon.paddle.UsersActivity"
+            android:label="@string/title_activity_users" >
+        </activity>
+        <activity
+            android:name="com.amazon.paddle.ChallengesActivity"
+            android:label="@string/title_activity_challenges" >
         </activity>
     </application>
 

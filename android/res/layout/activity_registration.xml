@@ -9,23 +9,23 @@
     tools:context=".RegistrationActivity" >
 
     <Button
-        android:id="@string/registerID"
+        android:id="@+id/registerID"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="90dp"
         android:onClick="goToProfileActivity"
-        android:text="@string/register" />
+        android:text="@+id/register" />
 
     <TextView
         android:id="@+id/TextViewUser"
         android:layout_width="50dp"
         android:layout_height="35dp"
-        android:layout_alignLeft="@string/registerID"
+        android:layout_alignLeft="@+id/registerID"
         android:layout_alignParentTop="true"
         android:layout_marginTop="106dp"
-        android:text="@string/rUsername"
+        android:text="@+id/rUsername"
         android:textSize="20sp" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_alignLeft="@+id/TextViewUser"
         android:layout_below="@+id/TextViewUser"
         android:layout_marginTop="18dp"
-        android:text="@string/rEmail"
+        android:text="@+id/rEmail"
         android:textSize="20sp" />
 
     <TextView
@@ -45,7 +45,7 @@
         android:layout_alignLeft="@+id/TextViewEmail"
         android:layout_below="@+id/TextViewEmail"
         android:layout_marginTop="18dp"
-        android:text="@string/rPassword"
+        android:text="@+id/rPassword"
         android:textSize="20sp" />
 
     <EditText
