@@ -19,6 +19,11 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.activity_profile);
         
         //TODO: Need to populate TextViews: name, record, email (do this once, so not in onResume)?
+        loadUserInfo();
+    }
+    
+    private void loadUserInfo() {
+        
     }
 
     /** Modularized initializing Elements just in case we change layout later. */
