@@ -1,13 +1,19 @@
 package com.amazon.paddle;
 
-import com.amazon.paddle.global.Global;
-
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.amazon.paddle.credential.User;
+import com.amazon.paddle.global.Global;
+import com.amazon.paddle.web.WebRequest;
 
 public class UsersActivity extends Activity {
 
@@ -38,8 +44,53 @@ public class UsersActivity extends Activity {
 
     @Override
     public void onResume() {
-        //TODO: need to pull updated user information and populate allUsers
         super.onResume();
+        new GetUsersTask().execute(Global.current_user);
+    }
+    
+    private class GetUsersTask extends AsyncTask<User, Void, Boolean> {
+        ProgressDialog progressDialog;
+        String response;
+        
+        @Override
+        protected Boolean doInBackground(User... userArray) {
+            User user = userArray[0];
+            if (Global.current_user.username.length() == 0 || Global.current_user.password.length() == 0) {
+                return false;
+            }
+
+            String urlParameters =
+                "id=" + user.id;
+     
+            response = WebRequest.executeGet(Global.base_url + "getAllUsers.php?" + urlParameters, "");
+
+            return true;
+        }
+        @Override
+        protected void onPostExecute(Boolean result) {
+            progressDialog.cancel();
+            
+            if (result == false) {
+                Toast.makeText(UsersActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();  
+                return;
+            } 
+            
+            if (response != null) {
+                Log.d("ALL USERS", response);
+                response.split("\n");
+            } else {
+                Log.d("ALL USERS", "no response!");
+            }
+        }
+        
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(
+                    UsersActivity.this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
     }
 
     private Button back;

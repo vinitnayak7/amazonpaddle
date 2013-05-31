@@ -55,7 +55,8 @@ public class ProfileActivity extends Activity {
     
     /** On-Click method for findUsers, takes you to UsersActivity. */
     public void goToUsersActivity(View v) {
-        //TODO: send to new activity where you grab all existing users except yourself and list them.
+        Intent i = new Intent(this, UsersActivity.class);
+        startActivity(i);
     }
     
     /** On-Click method for challenges, takes you to ChallengesActivity. */

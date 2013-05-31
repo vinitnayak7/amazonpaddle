@@ -1,6 +1,5 @@
 package com.amazon.paddle;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
@@ -9,19 +8,17 @@ import java.security.NoSuchAlgorithmException;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.amazon.paddle.web.WebRequest;
 import com.amazon.paddle.credential.User;
-import com.amazon.paddle.global.*;
+import com.amazon.paddle.global.Global;
+import com.amazon.paddle.web.WebRequest;
 
 public class MenuActivity extends Activity {
 

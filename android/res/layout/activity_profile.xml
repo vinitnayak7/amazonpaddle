@@ -47,7 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/quickContactBadge1"
         android:layout_below="@+id/quickContactBadge1"
-        android:text="@string/profileUsers" />
+        android:text="@string/profileUsers"
+        android:onClick="goToUsersActivity" />
 
     <Button
         android:id="@+id/profileChallengesID"
