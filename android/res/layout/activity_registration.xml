@@ -9,7 +9,7 @@
     tools:context=".RegistrationActivity" >
 
     <Button
-        android:id="@string/registerID"
+        android:id="@+id/registerID"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -22,7 +22,7 @@
         android:id="@+id/TextViewUser"
         android:layout_width="50dp"
         android:layout_height="35dp"
-        android:layout_alignLeft="@string/registerID"
+        android:layout_alignLeft="@+id/registerID"
         android:layout_alignParentTop="true"
         android:layout_marginTop="106dp"
         android:text="@string/rUsername"
