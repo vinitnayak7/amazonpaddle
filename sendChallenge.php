@@ -1,19 +1,20 @@
 <?php
 $con = mysqli_connect("localhost","gamersso_paddle","paddle","gamersso_paddle");
-if (mysqli_connect_errno($con)) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+if (mysqli_connect_errno($con))
+{
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-$gameName = $_REQUEST['gameName'];
+$gameName = str_replace(',', '', $_REQUEST['gameName']);
 $playerOne = $_REQUEST['playerOne'];
 $playerTwo = $_REQUEST['playerTwo'];
 $comments = $_REQUEST['comments'];
 
-$query = 'INSERT INTO games (p1, p2, name, accepted, comments) VALUES ('.$gameName.','.$playerOne.','.$playerTwo.',0'.$comments.')';
-$response = mysql_query($query);
+$query = 'INSERT INTO games (name, p1, p2, accepted, comments) VALUES ("'.$gameName.'","'.$playerOne.'","'.$playerTwo.'",0,"'.$comments.'")';
+$response = mysqli_query($con, $query);
 
 if ($response) {
-	print(mysql_insert_id($con));
+	print(mysqli_insert_id($con));
 } else {
 	print('failed');
 }
