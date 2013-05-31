@@ -1,6 +1,7 @@
 package com.amazon.paddle;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -20,6 +22,7 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazon.paddle.credential.User;
 import com.amazon.paddle.global.Global;
 import com.amazon.paddle.web.WebRequest;
 
@@ -202,6 +205,62 @@ public class ProfileActivity extends Activity {
         recentHistory = (ListView) findViewById(R.id.profileHistoryID);
     }
     
+    private class GetHistoryTask extends AsyncTask<User, Void, Boolean> {
+        ProgressDialog progressDialog;
+        String response;
+        
+        @Override
+        protected Boolean doInBackground(User... userArray) {
+            User user = userArray[0];
+            if (Global.current_user.username.length() == 0 || Global.current_user.password.length() == 0) {
+                return false;
+            }
+
+            String urlParameters =
+                "id=" + user.id;
+            
+            response = WebRequest.executeGet(Global.base_url + "getHistory.php?" + urlParameters, "");
+            if (response != null) {
+                String[] individualUsers = response.split("\n");
+                for (String s : individualUsers) {
+                    Game g = new Game();
+                    String[] userAttributes = s.split(",");
+                    g.name = userAttributes[0];
+                    g.opponent = userAttributes[1];
+                    g.winner = userAttributes[2];
+                    g.winnerScore = userAttributes[3];
+                    g.loserScore = userAttributes[4];
+                    String winlose = g.opponent == g.winner ? "L" : "W";
+                    String result = g.opponent + " - " + winlose
+                               + "\n\t Score: " + g.winnerScore+"-"+g.loserScore;
+                    gameList.add(result);
+                }
+            }
+            return true;
+        }
+        
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(
+                    ProfileActivity.this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+        
+        @Override
+        protected void onPostExecute(Boolean result) {
+            progressDialog.cancel();
+            populateHistory(gameList);
+        }
+    }
+    
+    private void populateHistory(ArrayList<String> games) {
+        ArrayAdapter<String> arrayAdapter =      
+                new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, games);
+        recentHistory.setAdapter(arrayAdapter);
+    }
+    
     /** On-Click method for findUsers, takes you to UsersActivity. */
     public void goToUsersActivity(View v) {
         Intent i = new Intent(this, UsersActivity.class);
@@ -220,10 +279,12 @@ public class ProfileActivity extends Activity {
         //TODO: Need to pull recent activity and populate/update the ListView recentHistory
         isMyself = getIntent().getExtras() == null ? true : false;
         initializeElements();
+        gameList.clear();
+        new GetHistoryTask().execute(Global.current_user);
         super.onResume();
     }
     
-     
+    private ArrayList<String> gameList = new ArrayList<String>();
     private boolean isMyself;
     private QuickContactBadge profilePicture;
     private TextView name;

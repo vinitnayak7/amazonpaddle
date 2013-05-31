@@ -7,4 +7,8 @@ public class Game {
     public String p2;
     public int accepted;
     public String comments;
+    public String winner;
+    public String opponent;
+    public String winnerScore;
+    public String loserScore;
 }
