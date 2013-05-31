@@ -60,11 +60,10 @@ public class ProfileActivity extends Activity {
         protected Boolean doInBackground(String... params) {
             String  urlParameters = null;
                 urlParameters =
-                    "gameName=" + URLEncoder.encode(params[0]) +
+                    "gameName=" + URLEncoder.encode(params[0].replace(",","")) +
                     "&playerOne=" + URLEncoder.encode(String.valueOf(Global.current_user.id)) +
                     "&playerTwo=" + URLEncoder.encode(getIntent().getExtras().getString("ID"))+
-                    "&comments=" + URLEncoder.encode(params[1]);
-                
+                    "&comments=" + URLEncoder.encode(params[1].replace(",",""));
            
             response = WebRequest.executeGet(Global.base_url + "sendChallenge.php?" + urlParameters, "");
             return true;
@@ -167,13 +166,15 @@ public class ProfileActivity extends Activity {
                 	LayoutInflater inflater = ProfileActivity.this.getLayoutInflater();
                 	builder.setView(inflater.inflate(R.layout.dialog_sendchallenge, null));
                 	builder.setPositiveButton(R.string.dialog_sendChallenge_submitLabel, new DialogInterface.OnClickListener(){
-						@Override
+                	
+                	@Override
 						public void onClick(DialogInterface dialog, int which) {
-							/*EditText nameText = (EditText) v.getRootView().findViewById(R.id.gamename);
-							EditText commentText = (EditText) v.getRootView().findViewById(R.id.gamecomments);
-							String gameName = nameText.getText().toString();
-							String gameComment = commentText.getText().toString();*/
-							new SendChallengeTask().execute(new String[]{"Game Name Here","Time, date, etc"});
+                			//final EditText nameText = (EditText) builder.getContext().findViewById(R.id.gamename);
+                			//final EditText commentText = (EditText) ProfileActivity.this.findViewById(R.id.gamecomments);
+    					
+							//String gameName = nameText.getText().toString();
+							//String gameComment = commentText.getText().toString();
+							new SendChallengeTask().execute(new String[]{"GameName", "Comments Here"});
 							dialog.dismiss();
 						}
                 		

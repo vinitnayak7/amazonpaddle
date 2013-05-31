@@ -7,7 +7,9 @@ import com.amazon.paddle.global.Global;
 import com.amazon.paddle.web.WebRequest;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -84,6 +86,7 @@ public class ChallengesActivity extends Activity {
                 response = WebRequest.executeGet(Global.base_url + "getChallenges.php?" + urlParameters, "");
                 if (response != null && !response.trim().equals("failure")) {
                     String[] individualGames = response.split("\n");
+                    int i = 0;
                     for (String s : individualGames) {
                         Log.d("s", s);
                         String[] gameAttributes = s.split(",");
@@ -106,7 +109,7 @@ public class ChallengesActivity extends Activity {
                             gameDisplayList.add(g.p1 +"\n" + g.comments);
                         } else {
                         }
-                        
+                        i++;
                     }
                
                 } else {
@@ -120,6 +123,29 @@ public class ChallengesActivity extends Activity {
         ArrayAdapter<String> arrayAdapter =      
                 new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, list);
         challenges.setAdapter(arrayAdapter);
+        challenges.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(ChallengesActivity.this);
+            	builder.setMessage(R.string.dialog_acceptDecline);
+            	builder.setPositiveButton("Bring it on!", new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						
+					}
+            	});
+            	builder.setNegativeButton("I'm Scared...", new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						
+					}
+            	});
+            	builder.create();
+				builder.show();
+			}
+        });
     }
  
     /** Modularize the initialization of elements just in case we change them */
