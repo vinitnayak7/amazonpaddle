@@ -21,6 +21,7 @@
     <string name="rUsernameID">rUsernameID</string>
     <string name="rPasswordID">rPasswordID</string>
     <string name="rEmailID">rEmailID</string>
+    <string name="logo_desc">Amazon Paddle Logo</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="profileNameID">profileNameID</string>
     <string name="profileRecordID">profileRecordID</string>

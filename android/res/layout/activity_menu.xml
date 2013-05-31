@@ -6,8 +6,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
     tools:context=".MenuActivity" >
-
+    
     <EditText
         android:id="@+id/usernameID"
         android:layout_width="wrap_content"
@@ -71,5 +72,21 @@
         android:layout_marginTop="21dp"
         android:onClick="goToProfileActivity"
         android:text="Login" />
+    
+    <LinearLayout
+android:orientation="vertical"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_above="@+id/textView2"
+>	<ImageView android:id="@+id/LogoImage"
+        android:contentDescription="@string/logo_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logo"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        ></ImageView></LinearLayout>
 
 </RelativeLayout>
