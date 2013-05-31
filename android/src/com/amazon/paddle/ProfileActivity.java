@@ -166,11 +166,11 @@ public class ProfileActivity extends Activity {
                 	builder.setPositiveButton(R.string.dialog_sendChallenge_submitLabel, new DialogInterface.OnClickListener(){
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							EditText nameText = (EditText) v.getRootView().findViewById(R.id.gamename);
+							/*EditText nameText = (EditText) v.getRootView().findViewById(R.id.gamename);
 							EditText commentText = (EditText) v.getRootView().findViewById(R.id.gamecomments);
 							String gameName = nameText.getText().toString();
-							String gameComment = commentText.getText().toString();
-							new SendChallengeTask().execute(new String[]{gameName,gameComment});
+							String gameComment = commentText.getText().toString();*/
+							new SendChallengeTask().execute(new String[]{"Game Name Here","Time, date, etc"});
 							dialog.dismiss();
 						}
                 		
