@@ -1,9 +1,18 @@
 package com.amazon.paddle;
 
+import java.net.URLEncoder;
+
+import com.amazon.paddle.credential.User;
+import com.amazon.paddle.global.Global;
+import com.amazon.paddle.web.WebRequest;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +32,48 @@ public class ProfileActivity extends Activity {
     }
     
     private void loadUserInfo() {
+        new LoadUserInfoTask().execute();
+        //name.setText(Global.current_user.first_name);
+    }
+    
+    private class LoadUserInfoTask extends AsyncTask<Void, Void, Boolean> {
+        ProgressDialog progressDialog;
+        String response;
         
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // Hack to convert int to string
+            StringBuilder sb = new StringBuilder();
+            sb.append("");
+            sb.append(Global.current_user.id);
+            String urlParameters =
+                    "id=" + URLEncoder.encode(sb.toString());
+         
+            response = WebRequest.executeGet(Global.base_url + "getWinLosses.php?" + urlParameters, "");
+            
+            return true;
+        }
+        
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(
+                    ProfileActivity.this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+        
+        @Override
+        protected void onPostExecute(Boolean result) {
+            Log.d("profile response", response);
+            if (response.equals("BAD")) {
+                record.setText("W-L: N/A");
+            } else {
+                record.setText("W-L: " + response);
+            }
+            
+            progressDialog.cancel();
+        }
     }
 
     /** Modularized initializing Elements just in case we change layout later. */
