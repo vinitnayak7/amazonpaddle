@@ -18,7 +18,7 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.activity_profile);
         
         initializeElements();
-        //TODO: Need to populate TextViews: name, 
+        //TODO: Need to populate TextViews: name, record, email (do this once, so not in onResume)?
     }
 
     /** Modularized initializing Elements just in case we change layout later. */
@@ -48,6 +48,11 @@ public class ProfileActivity extends Activity {
         return true;
     }
     
+    @Override
+    public void onResume() {
+        //TODO: Need to pull recent activity and populate/update the ListView recentHistory
+         super.onResume();
+    }
     private QuickContactBadge profilePicture;
     private TextView name;
     private TextView record;

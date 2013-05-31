@@ -35,6 +35,12 @@ public class ChallengesActivity extends Activity {
         return true;
     }
 
+    @Override
+    public void onResume() {
+        //TODO: pull down all Challenges and populates ListView, challenges
+        super.onResume();
+    }
+    
     private ListView challenges;
     private Button back;
     
